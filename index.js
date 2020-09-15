@@ -1,4 +1,4 @@
-const { findOne } = require('./models/User')
+const { findOne, update } = require('./models/User')
 const User = require('./models/User')
 
 let data = {
@@ -40,6 +40,8 @@ async function SelectOne(email){
     }
 }
 
+
+// Delete One
 async function Delete(email){
     try{
         let user = await User.deleteOne({email:email})
@@ -49,9 +51,23 @@ async function Delete(email){
     }
 }
 
+// Update one
+
+async function Update(id, data){
+    try{
+        if(data.name != undefined){
+            let updated = await User.updateOne({_id: id}, {$set:{name: data.name}})
+            console.log(updated)
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+
 
 
 // CreateUser(data)
 // SelectAll()
-SelectOne('claudio@email.com')
-//Delete('claudio@email.com')
+// SelectOne('email@email.com')
+// Delete('claudio@email.com')
+// Update('5f6126b9e3ebd13ae45b2a24', {name: 'Claudio Update 2'})
