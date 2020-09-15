@@ -1,3 +1,4 @@
+const { findOne } = require('./models/User')
 const User = require('./models/User')
 
 let data = {
@@ -17,4 +18,40 @@ async function  CreateUser(data){
     }
 }
 
-CreateUser(data)
+// Select All
+
+async function SelectAll(){
+    try{
+        let users = await User.find()
+        console.log(users)
+    }catch(err){
+        console.log(err)
+    }
+}
+
+// Select One
+
+async function SelectOne(email){
+    try{
+        let user = await User.findOne({email: email})
+        console.log(user)
+    }catch(err){
+        console.log(err)
+    }
+}
+
+async function Delete(email){
+    try{
+        let user = await User.deleteOne({email:email})
+        console.log(user)
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
+
+// CreateUser(data)
+// SelectAll()
+SelectOne('claudio@email.com')
+//Delete('claudio@email.com')
